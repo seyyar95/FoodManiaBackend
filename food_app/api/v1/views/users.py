@@ -5,9 +5,9 @@ from models import storage
 
 @app_views.route('/status', strict_slashes=False)
 def status():
-    new_dict = {'name': 'Useer', 'email': 'exampl@gmail.com', 'password_has': '123456'}
+    new_dict = {'name': 'Useer', 'email': 'exampl@gmail.com', 'password_hash': '123456'}
     new_user = User(**new_dict)
-    # new_user.set_password(new_user.password_hash)
+    new_user.set_password(new_user.password_hash)
     new_user.save()
     # users = storage.all(User).values()
     # return jsonify([user.to_dict() for user in users])
