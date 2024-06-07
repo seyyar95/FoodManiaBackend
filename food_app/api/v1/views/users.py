@@ -1,5 +1,6 @@
 from api.v1.views import app_views
 from flask import jsonify, current_app, request
+from flask_jwt_extended import create_access_token, create_refresh_token
 from models.users import User
 from models import storage
 
@@ -44,5 +45,17 @@ def login():
     if user is None or not user.check_password(password):
         return jsonify({'error': 'Invalid email or password'}), 400
     
-    return jsonify({'message': 'Login successful'}), 200
+    access_token = create_access_token(identity=user.name)
+    refresh_token = create_refresh_token(identity=user.name)
+    
+    
+    return jsonify(
+        {
+            "message": "Logged in succesfully", 
+            "tokens": {
+                "access": access_token,
+                "refresh": refresh_token
+                }
+        }
+    ), 200
     
