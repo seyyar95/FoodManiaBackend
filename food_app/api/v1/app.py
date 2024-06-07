@@ -5,6 +5,8 @@ from models import storage
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'H-FQNSzB6au14y_XEq3YKa7L8jSmqI7n'
+
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 

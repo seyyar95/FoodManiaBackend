@@ -37,6 +37,9 @@ class DBStorage:
             dictionary[key] = instance
         return dictionary
     
+    def get_session(self):
+        return self.__session
+    
     def reload(self):
         """Create all tables in the database and initialize a session."""
         from models.base_model import Base
