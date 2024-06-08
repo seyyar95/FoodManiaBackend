@@ -10,6 +10,7 @@ class Food(BaseModel, Base):
     __tablename__ = 'foods'
     name = Column(String(128), nullable=False, unique=True)
     recipe = Column(Text, nullable=False)
+    img = Column(String(128), nullable=True)
 
     ingredients = relationship("FoodIngredient", back_populates="food")
 
@@ -20,3 +21,10 @@ class Food(BaseModel, Base):
         foods = session.query(cls, FoodIngredient).join(FoodIngredient).join(Ingredient).filter(Ingredient.id.in_(ingredient_ids)).all()
 
         return foods
+    
+    @classmethod
+    def get_food_by_name(cls, name):
+        session = storage.get_session()
+
+        food = session.query(cls).filter_by(name=name).first()
+        return food

@@ -26,8 +26,6 @@ def register():
     new_user = User(name=name, email=email)
     new_user.set_password(password)
     new_user.save()
-    # storage.new(new_user)
-    # storage.save()
     return jsonify({'message': 'User created successfully'}), 201
 
  
@@ -52,11 +50,8 @@ def login():
     
     return jsonify(
         {
-            "message": "Logged in succesfully", 
-            "tokens": {
-                "access": access_token,
-                "refresh": refresh_token
-                }
+            "access": access_token,
+            "refresh": refresh_token
         }
     ), 200
     

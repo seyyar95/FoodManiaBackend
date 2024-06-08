@@ -18,8 +18,15 @@ jwt.init_app(app)
 app.register_blueprint(app_views)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
+
 with app.app_context():
     storage.reload()
+
+
+@jwt.expired_token_loader
+def expired_token_callback():
+    return jsonify({'message': 'The token has expired'}), 401
+
 
 @app.teardown_appcontext
 def close_db(error):

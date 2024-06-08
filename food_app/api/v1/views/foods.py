@@ -7,16 +7,16 @@ from models.food_ingredient import FoodIngredient
 from models import storage
 
 
-@app_views.route('/search_foods_by_ingridient',  methods=['GET'], strict_slashes=False)
+@app_views.route('/search_foods_by_ingredient',  methods=['GET'], strict_slashes=False)
 @jwt_required()
 def get_foods_by_ingredient():
-    # data = request.get_json()
-    # ingredient = data.get('ingredient')
-    # if not ingredient:
-    #     return jsonify({'error': 'Ingredient is required'}), 400
-    ingredients = ['Pasta', 'Lettuce', 'Tomato'] 
+    data = request.get_json()
+    ingredient = data.get('ingredients')
+    if not ingredient:
+        return jsonify({'error': 'Ingredient is required'}), 400
+    # ingredient = ['Pasta', 'Lettuce', 'Tomato'] 
     
-    ingredients_ = Ingredient.get_ingredients_ids(ingredients)
+    ingredients_ = Ingredient.get_ingredients_ids(ingredient)
     ingredient_ids = []
     for ingredient in ingredients_:
         ingredient_ids.append(ingredient['id'])
@@ -31,20 +31,19 @@ def get_foods_by_ingredient():
     for food, food_ingredient in foods:
         food_dict = {
             'name': food.name,
-            'recipe': food.recipe,
-            'ingredients': []
+            'id': food.id
         }
-        for food_ingredient in food.ingredients:
-            ingredient = storage.get(Ingredient, food_ingredient.ingredient_id)
-            if ingredient:
-                food_dict['ingredients'].append({
-                    'name': ingredient.name,
-                    'quantity': food_ingredient.quantity
-                })
+        # for food_ingredient in food.ingredients:
+        #     ingredient = storage.get(Ingredient, food_ingredient.ingredient_id)
+        #     if ingredient:
+        #         food_dict['ingredients'].append({
+        #             'name': ingredient.name,
+        #             'quantity': food_ingredient.quantity
+        #         })
         
         foods_list.append(food_dict)
 
-    return jsonify(foods_list)
+    return jsonify(foods_list), 200
 
     # food1 = Food(name="Pizza", recipe="Dough, sauce, cheese")
     # food1.save()
@@ -64,4 +63,11 @@ def get_foods_by_ingredient():
     # food_ingredient2.save()
     # food_ingredient3 = FoodIngredient(food=food2, ingredient=ingredient3, quantity=3)
     # food_ingredient3.save()
+
+
+@app_views.route('/search_foods_by_name',  methods=['GET'], strict_slashes=False)
+# @jwt_required()
+def get_food_by_names():
+    food = Food.get_food_by_name('Pizza')
+    
     

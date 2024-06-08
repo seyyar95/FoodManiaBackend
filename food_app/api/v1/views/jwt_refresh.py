@@ -10,7 +10,3 @@ def refresh():
     access_token = create_access_token(identity=current_user)
     return jsonify({'access_token': access_token}), 200
 
-
-# @jwt.expired_token_loader
-# def expired_token_callback():
-#     return jsonify({'message': 'The token has expired'}), 401

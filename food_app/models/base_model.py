@@ -5,12 +5,9 @@ import uuid
 Base = declarative_base()
 
 class BaseModel:
-    id = Column(String(60), nullable=False, primary_key=True)
+    id = Column(Integer, nullable=False, primary_key=True, autoincrement=True)
 
     def __init__(self, *args, **kwargs):
-        
-        self.id = str(uuid.uuid4())
-        
         for key, value in kwargs.items():
             setattr(self, key, value)
     
