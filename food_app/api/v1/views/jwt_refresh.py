@@ -2,6 +2,7 @@ from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_tok
 from flask import jsonify
 from api.v1.views import app_views
 
+
 @app_views.route('/refresh', methods=['POST'], strict_slashes=False)
 @jwt_required(refresh=True)
 def refresh():

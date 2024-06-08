@@ -39,6 +39,12 @@ class DBStorage:
     
     def get_session(self):
         return self.__session
+
+    def get(self, cls, id):
+        all_cls = self.all(cls)
+        for value in all_cls.values():
+            if (value.id == id):
+                return value
     
     def reload(self):
         """Create all tables in the database and initialize a session."""
