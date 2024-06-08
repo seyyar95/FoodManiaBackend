@@ -1,5 +1,5 @@
 from api.v1.views import app_views
-from flask import jsonify, current_app, request
+from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token
 from models.users import User
 from models import storage
@@ -25,8 +25,9 @@ def register():
 
     new_user = User(name=name, email=email)
     new_user.set_password(password)
-    storage.new(new_user)
-    storage.save()
+    new_user.save()
+    # storage.new(new_user)
+    # storage.save()
     return jsonify({'message': 'User created successfully'}), 201
 
  

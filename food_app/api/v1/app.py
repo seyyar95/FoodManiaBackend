@@ -3,12 +3,14 @@ from flask_cors import CORS
 from api.v1.views import app_views
 from models import storage
 from flask_jwt_extended import JWTManager
+from datetime import timedelta
 
 
 app = Flask(__name__)
-# app.config['SECRET_KEY'] = 'H-FQNSzB6au14y_XEq3YKa7L8jSmqI7n'
+
 app.config['JWT_SECRET_KEY'] = 'a3f3217b1db812f16990d439'
-# app.config["JWT_ALGORITHM"] = "HS256"
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
+app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=30)
 
 jwt = JWTManager()
 jwt.init_app(app)
@@ -18,6 +20,15 @@ CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 with app.app_context():
     storage.reload()
+
+@app.teardown_appcontext
+def close_db(error):
+    """ Close Storage """
+    storage.close()
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return jsonify({'error': 'Not found'}), 404
 
 
 if __name__ == '__main__':
