@@ -70,11 +70,6 @@ def get_foods_by_ingredient():
 # @jwt_required()
 def get_food_by_names():
     food = Food.get_food_by_name('Pizza')
-
-    return jsonify({
-        'name': food.name,
-        'id': food.id
-    })
     
 
 
