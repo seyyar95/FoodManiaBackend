@@ -1,5 +1,5 @@
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, String, Integer, ForeignKey, Text
+from sqlalchemy import Column, String, Integer, ForeignKey, Text, func, select
 from sqlalchemy.orm import relationship
 from models import storage
 from models.food_ingredient import FoodIngredient
@@ -15,16 +15,23 @@ class Food(BaseModel, Base):
     ingredients = relationship("FoodIngredient", back_populates="food")
 
     @classmethod
-    def get_foods_by_ingredients(cls, ingredient_ids):
-        session = storage.get_session()
-        
-        foods = session.query(cls, FoodIngredient).join(FoodIngredient).join(Ingredient).filter(Ingredient.id.in_(ingredient_ids)).all()
+    def get_foods_by_ingredients(cls, ingredients):
+        ingredient_ids = []
 
+        for ing in ingredients:
+            obj = storage.get_by_name(Ingredient, ing)
+            if obj:
+                ingredient_ids.append(obj.id)
+
+        session = storage.get_session()
+        foods = session.query(cls).join(FoodIngredient).filter(FoodIngredient.ingredient_id.in_(ingredient_ids)).group_by(Food.id).having(func.count(FoodIngredient.id) == len(ingredient_ids))
+
+        
         return foods
     
     @classmethod
     def get_food_by_name(cls, name):
-        session = storage.get_session()
+        # session = storage.get_session()
 
-        food = session.query(cls).filter_by(name=name).first()
+        food = storage.get_by_name(cls, name)
         return food

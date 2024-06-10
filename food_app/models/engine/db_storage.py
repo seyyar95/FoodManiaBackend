@@ -40,10 +40,16 @@ class DBStorage:
     def get_session(self):
         return self.__session
 
-    def get(self, cls, id):
+    def get_by_id(self, cls, id):
         all_cls = self.all(cls)
         for value in all_cls.values():
             if (value.id == id):
+                return value
+    
+    def get_by_name(self, cls, name):
+        all_cls = self.all(cls)
+        for value in all_cls.values():
+            if (value.name == name):
                 return value
     
     def reload(self):
