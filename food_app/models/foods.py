@@ -28,10 +28,3 @@ class Food(BaseModel, Base):
 
         
         return foods
-    
-    @classmethod
-    def get_food_by_name(cls, name):
-        # session = storage.get_session()
-
-        food = storage.get_by_name(cls, name)
-        return food

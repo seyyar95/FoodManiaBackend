@@ -69,8 +69,12 @@ def get_foods_by_ingredient():
 @app_views.route('/search_foods_by_name',  methods=['GET'], strict_slashes=False)
 # @jwt_required()
 def get_food_by_names():
-    food = Food.get_food_by_name('Pizza')
-    
+    data = request.get_json()
+    food = storage.get_by_name(Food, data.get('name'))
+    if food:
+        food_dict = {'name': food.name, 'id': food.id}
+    return jsonify(food_dict)
+
 
 
 
