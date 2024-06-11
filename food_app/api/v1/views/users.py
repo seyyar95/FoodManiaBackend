@@ -25,6 +25,7 @@ def register():
 
     new_user = User(name=name, email=email)
     new_user.set_password(password)
+
     new_user.save()
     return jsonify({'message': 'User created successfully'}), 201
 

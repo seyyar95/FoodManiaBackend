@@ -8,15 +8,15 @@ from models import storage
 
 
 @app_views.route('/search_foods_by_ingredient',  methods=['GET'], strict_slashes=False)
-# @jwt_required()
+@jwt_required()
 def get_foods_by_ingredient():
-    # data = request.get_json()
-    # ingredient = data.get('ingredients')
-    # if not ingredient:
-    #     return jsonify({'error': 'Ingredient is required'}), 400
-    ingredients = ['Cheese', 'Tomato'] 
-    
-    foods = Food.get_foods_by_ingredients(ingredients)
+    data = request.get_json()
+    ingredient = data.get('ingredients')
+    if not ingredient:
+        return jsonify({'error': 'Ingredient is required'}), 400
+    # ingredients = ['Cheese', 'Tomato'] 
+    print(ingredient)
+    foods = Food.get_foods_by_ingredients(ingredient)
     
 
 
@@ -27,13 +27,6 @@ def get_foods_by_ingredient():
             'name': food.name,
             'id': food.id
         }
-    #     # for food_ingredient in food.ingredients:
-    #     #     ingredient = storage.get(Ingredient, food_ingredient.ingredient_id)
-    #     #     if ingredient:
-    #     #         food_dict['ingredients'].append({
-    #     #             'name': ingredient.name,
-    #     #             'quantity': food_ingredient.quantity
-    #     #         })
         
         foods_list.append(food_dict)
 
@@ -67,26 +60,29 @@ def get_foods_by_ingredient():
 
 
 @app_views.route('/search_foods_by_name',  methods=['GET'], strict_slashes=False)
-# @jwt_required()
+@jwt_required()
 def get_food_by_names():
     data = request.get_json()
     food = storage.get_by_name(Food, data.get('name'))
     if food:
-        food_dict = {'name': food.name, 'id': food.id}
+        food_dict = {
+            'name': food.name,
+            'id': food.id
+            }
     return jsonify(food_dict)
 
 
 
 
 @app_views.route('/details',  methods=['GET'], strict_slashes=False)
-# @jwt_required()
+@jwt_required()
 def get_food_details():
-    # data = request.get_json()
-    # food_id = data.get('id')
-    # if not food_id:
-    #     return jsonify({'error': 'Food id is required'}), 400
+    data = request.get_json()
+    food_id = data.get('id')
+    if not food_id:
+        return jsonify({'error': 'Food id is required'}), 400
     
-    food = storage.get_by_id(Food, 1)
+    food = storage.get_by_id(Food, food_id)
 
     if not food:
         return jsonify({'error': 'Food not found'}), 404

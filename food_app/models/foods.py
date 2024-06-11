@@ -22,9 +22,15 @@ class Food(BaseModel, Base):
             obj = storage.get_by_name(Ingredient, ing)
             if obj:
                 ingredient_ids.append(obj.id)
+            else:
+                ingredient_ids.append(0)
 
         session = storage.get_session()
-        foods = session.query(cls).join(FoodIngredient).filter(FoodIngredient.ingredient_id.in_(ingredient_ids)).group_by(Food.id).having(func.count(FoodIngredient.id) == len(ingredient_ids))
+        foods = session.query(cls) \
+            .join(FoodIngredient) \
+            .filter(FoodIngredient.ingredient_id.in_(ingredient_ids)) \
+            .group_by(Food.id) \
+            .having(func.count(FoodIngredient.id) == len(ingredient_ids))
 
         
         return foods
