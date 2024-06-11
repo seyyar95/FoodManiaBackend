@@ -3,6 +3,7 @@ from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token
 from models.users import User
 from models import storage
+from models.foodsave import FoodSave 
 
 
 @app_views.route('/register',  methods=['POST'], strict_slashes=False)
