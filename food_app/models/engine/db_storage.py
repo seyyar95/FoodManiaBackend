@@ -45,6 +45,7 @@ class DBStorage:
         for value in all_cls.values():
             if (value.id == id):
                 return value
+        return None
     
     def get_by_name(self, cls, name):
         all_cls = self.all(cls)

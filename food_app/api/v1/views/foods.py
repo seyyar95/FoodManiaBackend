@@ -1,9 +1,12 @@
 from api.v1.views import app_views
 from flask import jsonify, request
+from models.users import User
 from models.foods import Food
 from models.ingredients import Ingredient
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.food_ingredient import FoodIngredient
+from models import storage
+from models.foodsave import FoodSave
 from models import storage
 
 
@@ -105,4 +108,16 @@ def get_food_details():
     return jsonify([food_dict]), 200
 
 
-
+@app_views.route('/save', methods=['POST', 'DELETE'], strict_slashes=False)
+@jwt_required()
+def save_food():
+    userjwt_id = get_jwt_identity()
+    if (request.method == 'POST' and storage.get_by_id(User, userjwt_id)):
+        data = request.get_json()
+        food_id = data.get('food_id')
+        save = FoodSave(user_id = userjwt_id, food_id = food_id)
+        save.save()
+        return " ", 201
+    if (request.method == 'DELETE'):
+        pass
+    return " ",  403

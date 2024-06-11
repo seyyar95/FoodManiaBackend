@@ -13,6 +13,7 @@ class Food(BaseModel, Base):
     img = Column(String(128), nullable=True)
 
     ingredients = relationship("FoodIngredient", back_populates="food")
+    foodsave = relationship("FoodSave", back_populates="food")
 
     @classmethod
     def get_foods_by_ingredients(cls, ingredients):

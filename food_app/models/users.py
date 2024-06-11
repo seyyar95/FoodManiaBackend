@@ -12,6 +12,8 @@ class User(BaseModel, Base):
     password_hash = Column(String(256), nullable=False)
     profile_picture = Column(String(128), nullable=True)
 
+    usersave = relationship("FoodSave", back_populates="user")
+
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
