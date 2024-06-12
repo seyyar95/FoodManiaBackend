@@ -6,6 +6,8 @@ click==8.1.7
 contourpy==1.2.1
 cycler==0.12.1
 distlib==0.3.8
+dnspython==2.6.1
+email_validator==2.1.1
 filelock==3.14.0
 flasgger==0.9.7.1
 Flask==3.0.3
@@ -14,6 +16,7 @@ Flask-JWT-Extended==4.6.0
 fonttools==4.52.4
 greenlet==3.0.3
 html5lib==1.1
+idna==3.7
 itsdangerous==2.2.0
 Jinja2==3.1.4
 jsonschema==4.22.0

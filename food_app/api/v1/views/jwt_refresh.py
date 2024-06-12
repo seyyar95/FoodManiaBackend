@@ -1,6 +1,6 @@
+from api.v1.views import app_views
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from flask import jsonify
-from api.v1.views import app_views
 
 
 @app_views.route('/refresh', methods=['POST'], strict_slashes=False)

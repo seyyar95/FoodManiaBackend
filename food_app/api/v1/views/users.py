@@ -1,10 +1,11 @@
 from api.v1.views import app_views
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
-from models.users import User
-from models import storage
-from models.foodsave import FoodSave 
 from werkzeug.utils import secure_filename
+from email_validator import validate_email, EmailNotValidError
+from models.users import User
+from models.foodsave import FoodSave 
+from models import storage
 import os
 
 @app_views.route('/register',  methods=['POST'], strict_slashes=False)
@@ -12,6 +13,11 @@ def register():
     data = request.get_json()
     name = data.get('name')
     email = data.get('email')
+    try:
+        valid_email = validate_email(email)
+    except EmailNotValidError as e:
+        return jsonify({'error': str(e)}), 400
+
     password = data.get('password')
 
     if not name:
