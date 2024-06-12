@@ -117,6 +117,10 @@ def save_food():
     food_id = data.get('food_id')
     if (request.method == 'POST' and storage.get_by_id(User, userjwt_id)):
         save = FoodSave(user_id = userjwt_id, food_id = food_id)
+        session = storage.get_session()
+        save_second = session.query(FoodSave).filter(FoodSave.user_id == userjwt_id, FoodSave.food_id == food_id).first()
+        if(save_second):
+            return "save olunub"
         save.save()
         return " ", 201
     if (request.method == 'PATCH' and storage.get_by_id(User, userjwt_id)):
