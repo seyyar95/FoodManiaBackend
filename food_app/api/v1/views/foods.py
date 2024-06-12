@@ -109,16 +109,18 @@ def get_food_details():
     return jsonify([food_dict]), 200
 
 
-@app_views.route('/save', methods=['POST', 'DELETE'], strict_slashes=False)
+@app_views.route('/save', methods=['POST', 'PATCH'], strict_slashes=False)
 @jwt_required()
 def save_food():
     userjwt_id = get_jwt_identity()
+    data = request.get_json()
+    food_id = data.get('food_id')
     if (request.method == 'POST' and storage.get_by_id(User, userjwt_id)):
-        data = request.get_json()
-        food_id = data.get('food_id')
         save = FoodSave(user_id = userjwt_id, food_id = food_id)
         save.save()
         return " ", 201
-    if (request.method == 'DELETE'):
-        pass
+    if (request.method == 'PATCH' and storage.get_by_id(User, userjwt_id)):
+        session = storage.get_session()
+        save_delete = session.query(FoodSave).filter(FoodSave.user_id == userjwt_id, FoodSave.food_id == food_id).first().delete()
+        return " ", 200
     return " ",  403

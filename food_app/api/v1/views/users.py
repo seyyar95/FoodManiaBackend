@@ -1,6 +1,7 @@
 from api.v1.views import app_views
 from flask import jsonify, request
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
+from api.v1 import app
 from werkzeug.utils import secure_filename
 from email_validator import validate_email, EmailNotValidError
 from models.users import User

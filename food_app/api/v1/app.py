@@ -20,7 +20,7 @@ app.config['FOODS_PICTURES'] = FOODS_PICTURES
 jwt = JWTManager()
 jwt.init_app(app)
 
-app.register_blueprint(app_views)
+
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
@@ -44,4 +44,5 @@ def page_not_found(e):
 
 
 if __name__ == '__main__':
+    app.register_blueprint(app_views)
     app.run(host='0.0.0.0', port=5000, threaded=True, debug=True)
