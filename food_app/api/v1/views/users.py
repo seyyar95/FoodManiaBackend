@@ -78,7 +78,7 @@ def update_user():
     if profile_pictrue:
         filename = secure_filename(profile_pictrue.filename)
 
-        profile_pictrue.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        profile_pictrue.save(os.path.join(app.config['PROFILE_PICTURES'], filename))
         
         user.profile_pic = filename + "_" + str(user.id)
     user.save()
