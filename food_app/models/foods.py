@@ -9,7 +9,7 @@ from models.ingredients import Ingredient
 class Food(BaseModel, Base):
     __tablename__ = 'foods'
     name = Column(String(128), nullable=False, unique=True)
-    recipe = Column(Text, nullable=False)
+    steps = Column(Text, nullable=False)
     img = Column(String(128), nullable=True)
 
     ingredients = relationship("FoodIngredient", back_populates="food")

@@ -1,11 +1,10 @@
 from api.v1.views import app_views
 from flask import jsonify, request
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.users import User
 from models.foods import Food
 from models.ingredients import Ingredient
-from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.food_ingredient import FoodIngredient
-from models import storage
 from models.foodsave import FoodSave
 from models import storage
 
@@ -17,9 +16,9 @@ def get_foods_by_ingredient():
     ingredient = data.get('ingredients')
     if not ingredient:
         return jsonify({'error': 'Ingredient is required'}), 400
-    # ingredients = ['Cheese', 'Tomato'] 
-    print(ingredient)
+
     foods = Food.get_foods_by_ingredients(ingredient)
+
     
 
 
@@ -28,18 +27,19 @@ def get_foods_by_ingredient():
     for food in foods:
         food_dict = {
             'name': food.name,
-            'id': food.id
+            'id': food.id,
+            'img': food.img
         }
         
         foods_list.append(food_dict)
 
     return jsonify(foods_list), 200
 
-    # food1 = Food(name="sdsdsads", recipe="Dough, sauce, cheese")
+    # food1 = Food(name="sdsdsads", steps="Dough, sauce, cheese")
     # food1.save()
-    # food2 = Food(name="Pasta", recipe="Noodles, sauce")
+    # food2 = Food(name="Pasta", steps="Noodles, sauce")
     # food2.save()
-    # food3 = Food(name="Pizza", recipe="Dough, sauce, cheese")
+    # food3 = Food(name="Pizza", steps="Dough, sauce, cheese")
     # food3.save()
 
     # ingredient1 = Ingredient(name="Tomato")
@@ -70,9 +70,12 @@ def get_food_by_names():
     if food:
         food_dict = {
             'name': food.name,
-            'id': food.id
-            }
-    return jsonify(food_dict)
+            'id': food.id,
+            'img': food.img
+        }
+        return jsonify(food_dict), 200
+    else:
+        return jsonify({'error': 'Food not found'}), 404
 
 
 
@@ -85,15 +88,13 @@ def get_food_details():
     if not food_id:
         return jsonify({'error': 'Food id is required'}), 400
     
-    food = storage.get_by_id(Food, food_id)
+    food = storage.get_by_id(Food, 1)
 
     if not food:
         return jsonify({'error': 'Food not found'}), 404
 
     food_dict = { 
-        'name': food.name,
-        'recipe': food.recipe,
-        'img': food.img,
+        'steps': food.steps.split('.'),
         'ingredients': []
     }
 

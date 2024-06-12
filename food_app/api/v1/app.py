@@ -12,6 +12,11 @@ app.config['JWT_SECRET_KEY'] = 'a3f3217b1db812f16990d439'
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=30)
 
+PROFILE_PICTURES = '/static/uploads/profile_pics/'
+FOODS_PICTURES = '/static/uploads/foods_pics/'
+app.config['PROFILE_PICTURES'] = PROFILE_PICTURES
+app.config['FOODS_PICTURES'] = FOODS_PICTURES
+
 jwt = JWTManager()
 jwt.init_app(app)
 
@@ -24,7 +29,7 @@ with app.app_context():
 
 
 @jwt.expired_token_loader
-def expired_token_callback():
+def expired_token_callback(expired_token, exception):
     return jsonify({'message': 'The token has expired'}), 401
 
 

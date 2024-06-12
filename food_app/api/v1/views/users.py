@@ -1,10 +1,11 @@
 from api.v1.views import app_views
 from flask import jsonify, request
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from models.users import User
 from models import storage
 from models.foodsave import FoodSave 
-
+from werkzeug.utils import secure_filename
+import os
 
 @app_views.route('/register',  methods=['POST'], strict_slashes=False)
 def register():
@@ -56,4 +57,30 @@ def login():
             "refresh": refresh_token
         }
     ), 200
+
+
+@app_views.route('/update',  methods=['PUT'], strict_slashes=False)
+@jwt_required()
+def update_user():
+    data = request.get_json()
+    user_id = get_jwt_identity()
+    profile_pictrue = request.file['profile_pic']
     
+
+    user = storage.get_by_id(User, user_id)
+    
+    if data.get('name'):
+        user.name = data.get('name')
+    if data.get('email'):
+        user.email = data.get('email')
+    if data.get('password'):
+        user.set_password(data.get('password'))
+    if profile_pictrue:
+        filename = secure_filename(profile_pictrue.filename)
+
+        profile_pictrue.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        
+        user.profile_pic = filename + "_" + str(user.id)
+    user.save()
+
+    return jsonify({'message': 'User updated successfully'}), 200
