@@ -12,18 +12,20 @@ from models import storage
 @app_views.route('/search_foods_by_ingredient',  methods=['GET'], strict_slashes=False)
 @jwt_required()
 def get_foods_by_ingredient():
+    # Get the data from the request
     data = request.get_json()
     ingredient = data.get('ingredients')
+    
+    # Return an error if the ingredient is not provided
     if not ingredient:
         return jsonify({'error': 'Ingredient is required'}), 400
-
-    foods = Food.get_foods_by_ingredients(ingredient)
-
     
-
+    # Get the foods that contain the ingredient
+    foods = Food.get_foods_by_ingredients(ingredient)
 
     foods_list = []
 
+    # Create a dictionary with the food data
     for food in foods:
         food_dict = {
             'name': food.name,
@@ -65,8 +67,13 @@ def get_foods_by_ingredient():
 @app_views.route('/search_foods_by_name',  methods=['GET'], strict_slashes=False)
 @jwt_required()
 def get_food_by_names():
+    # Get the data from the request
     data = request.get_json()
+
+    # Get the food by name
     food = storage.get_by_name(Food, data.get('name'))
+    
+    # Create a dictionary with the food data if the food is found
     if food:
         food_dict = {
             'name': food.name,
@@ -83,21 +90,29 @@ def get_food_by_names():
 @app_views.route('/details',  methods=['GET'], strict_slashes=False)
 @jwt_required()
 def get_food_details():
+    # Get the data from the request
     data = request.get_json()
     food_id = data.get('id')
+
+    # Return an error if the food id is not provided
     if not food_id:
         return jsonify({'error': 'Food id is required'}), 400
     
-    food = storage.get_by_id(Food, 1)
+    # Get the food by id
+    food = storage.get_by_id(Food, food_id)
 
+    # Return an error if the food is not found
     if not food:
         return jsonify({'error': 'Food not found'}), 404
 
+
+    # Create a dictionary with the food data
     food_dict = { 
         'steps': food.steps.split('.'),
         'ingredients': []
     }
 
+    # Get the ingredients for the food
     for food_ingredient in food.ingredients:
         ingredient = storage.get_by_id(Ingredient, food_ingredient.ingredient_id)
         if ingredient:
@@ -112,10 +127,19 @@ def get_food_details():
 @app_views.route('/save', methods=['POST', 'PATCH'], strict_slashes=False)
 @jwt_required()
 def save_food():
+    # Get the user id from the JWT
     userjwt_id = get_jwt_identity()
+
+    # Get the data from the request
     data = request.get_json()
     food_id = data.get('food_id')
-    if (request.method == 'POST' and storage.get_by_id(User, userjwt_id)):
+
+    # Get food and user objects by id
+    food = storage.get_by_id(Food, food_id)
+    user = storage.get_by_id(User, userjwt_id)
+
+    # Create a new FoodSave object and save it to the database if the user and the food exists
+    if (request.method == 'POST' and user and food):
         save = FoodSave(user_id = userjwt_id, food_id = food_id)
         session = storage.get_session()
         save_second = session.query(FoodSave).filter(FoodSave.user_id == userjwt_id, FoodSave.food_id == food_id).first()
@@ -123,7 +147,9 @@ def save_food():
             return "save olunub"
         save.save()
         return " ", 201
-    if (request.method == 'PATCH' and storage.get_by_id(User, userjwt_id)):
+    
+    # Delete the FoodSave object from the database if the user exists
+    if (request.method == 'PATCH' and user and food):
         session = storage.get_session()
         save_delete = session.query(FoodSave).filter(FoodSave.user_id == userjwt_id, FoodSave.food_id == food_id).first().delete()
         return " ", 200

@@ -7,16 +7,23 @@ from models.ingredients import Ingredient
 
 
 class Food(BaseModel, Base):
+    """
+    Food model class, represents a food item
+    """
     __tablename__ = 'foods'
     name = Column(String(128), nullable=False, unique=True)
     steps = Column(Text, nullable=False)
     img = Column(String(128), nullable=True)
 
+    # Define the many-to-many relationship between foods and ingredients
     ingredients = relationship("FoodIngredient", back_populates="food")
     foodsave = relationship("FoodSave", back_populates="food")
 
     @classmethod
     def get_foods_by_ingredients(cls, ingredients):
+        """
+        Class method to get foods by ingredients
+        """
         ingredient_ids = []
 
         for ing in ingredients:
@@ -26,7 +33,10 @@ class Food(BaseModel, Base):
             else:
                 ingredient_ids.append(0)
 
+        # Get the database session
         session = storage.get_session()
+
+        # Query the database for foods that contain all the ingredients
         foods = session.query(cls) \
             .join(FoodIngredient) \
             .filter(FoodIngredient.ingredient_id.in_(ingredient_ids)) \
