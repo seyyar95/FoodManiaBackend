@@ -86,7 +86,7 @@ def update_user():
     # Get the data from the request
     data = request.get_json()
     user_id = get_jwt_identity()
-    profile_pictrue = request.file['profile_pic']
+    profile_pictrue = request.files['profile_pic']
     
     # Get the user by id
     user = storage.get_by_id(User, user_id)
@@ -100,11 +100,18 @@ def update_user():
         user.set_password(data.get('password'))
     if profile_pictrue:
         # Save the profile picture
-        filename = secure_filename(profile_pictrue.filename)
+        unique_filename = secure_filename(profile_pictrue.filename) + "_" + str(user.id)
 
-        profile_pictrue.save(os.path.join(app_views.config['PROFILE_PICTURES'], filename))
+        profile_pictrue.save(os.path.join(app_views.config['PROFILE_PICTURES'], unique_filename))
         
-        user.profile_pic = filename + "_" + str(user.id)
+        user.profile_pic = unique_filename
     user.save()
 
-    return jsonify({'message': 'User updated successfully'}), 200
+    profile_pic_url = request.host_url.strip('/') +  os.path.join(app_views.config['PROFILE_PICTURES'], user.profile_pic)
+
+    return jsonify({
+        'message': 'User updated successfully',
+        'name': user.name,
+        'email': user.email,
+        'profile_pic_url': profile_pic_url
+    }), 200
