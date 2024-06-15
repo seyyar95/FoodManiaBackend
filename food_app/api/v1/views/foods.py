@@ -1,5 +1,5 @@
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, current_app, url_for, send_file
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from models.users import User
 from models.foods import Food
@@ -7,6 +7,20 @@ from models.ingredients import Ingredient
 from models.food_ingredient import FoodIngredient
 from models.foodsave import FoodSave
 from models import storage
+import os
+
+
+
+@app_views.route('/images/<filename>', methods=['GET'], strict_slashes=False)
+def get_image(filename):
+    # Construct the full path to the image
+    image_path = os.path.join(current_app.config['FOODS_PICTURES'], filename)
+    
+    if not os.path.exists(image_path):
+        return jsonify({'error': 'Image not found'}), 404
+
+    return send_file(image_path)
+
 
 
 @app_views.route('/search_foods_by_ingredient',  methods=['GET'], strict_slashes=False)
@@ -27,10 +41,12 @@ def get_foods_by_ingredient():
 
     # Create a dictionary with the food data
     for food in foods:
+        food_pic = url_for('app_views.get_image', filename='download.jpg', _external=True)
+        
         food_dict = {
             'name': food.name,
             'id': food.id,
-            'img': food.img
+            'img': food_pic
         }
         
         foods_list.append(food_dict)
@@ -63,26 +79,35 @@ def get_foods_by_ingredient():
     # food_ingredient5.save()
 
 
-
 @app_views.route('/search_foods_by_name',  methods=['GET'], strict_slashes=False)
 @jwt_required()
 def get_food_by_names():
     # Get the data from the request
     data = request.get_json()
+    search_name = data.get('name')
 
-    # Get the food by name
-    food = storage.get_by_name(Food, data.get('name'))
+    if not search_name:
+        return jsonify({'error': 'Name parameter is required'}), 400
+
+    all_foods = storage.all(Food)
+
+    # Filter foods that contain the search name
+    foods_to_get = [food for food in all_foods.values() if search_name in food.name]
+
+    food_pic = url_for('app_views.get_image', filename='download.jpg', _external=True)
     
+    foods_to_show = []
     # Create a dictionary with the food data if the food is found
-    if food:
+    for food in foods_to_get:
         food_dict = {
             'name': food.name,
             'id': food.id,
-            'img': food.img
+            'img': food_pic
         }
-        return jsonify(food_dict), 200
-    else:
-        return jsonify({'error': 'Food not found'}), 404
+
+        foods_to_show.append(food_dict)
+    
+    return jsonify(foods_to_show), 200
 
 
 
@@ -108,7 +133,7 @@ def get_food_details():
 
     # Create a dictionary with the food data
     food_dict = { 
-        'steps': food.steps.split('.'),
+        'steps': food.steps.split('|'),
         'ingredients': []
     }
 
@@ -116,15 +141,19 @@ def get_food_details():
     for food_ingredient in food.ingredients:
         ingredient = storage.get_by_id(Ingredient, food_ingredient.ingredient_id)
         if ingredient:
+            
+            ingredient_pic = url_for('app_views.get_image', filename='download.jpg', _external=True)
+
             food_dict['ingredients'].append({
                 'name': ingredient.name,
+                'img': ingredient_pic
                 'quantity': food_ingredient.quantity
             })
 
-    return jsonify([food_dict]), 200
+    return jsonify(food_dict), 200
 
 
-@app_views.route('/save', methods=['POST', 'PATCH'], strict_slashes=False)
+@app_views.route('/save', methods=['GET', 'POST', 'PATCH'], strict_slashes=False)
 @jwt_required()
 def save_food():
     # Get the user id from the JWT
@@ -134,23 +163,49 @@ def save_food():
     data = request.get_json()
     food_id = data.get('food_id')
 
-    # Get food and user objects by id
+    # Get food object by id
     food = storage.get_by_id(Food, food_id)
+
+    # Return an error if the food is not found
+    if not food:
+        return jsonify({'error': 'Food not found'}), 404
+    
+    # Get user object by id
     user = storage.get_by_id(User, userjwt_id)
+
+    # Return an error if the user is not found
+    if not user:
+        return jsonify({'error': 'User not found'}), 404
 
     # Create a new FoodSave object and save it to the database if the user and the food exists
     if (request.method == 'POST' and user and food):
         save = FoodSave(user_id = userjwt_id, food_id = food_id)
         session = storage.get_session()
-        save_second = session.query(FoodSave).filter(FoodSave.user_id == userjwt_id, FoodSave.food_id == food_id).first()
+        save_second = session.query(FoodSave).filter(FoodSave.user_id == user.id, FoodSave.food_id == food.id).first()
         if(save_second):
             return "save olunub"
         save.save()
         return " ", 201
     
-    # Delete the FoodSave object from the database if the user exists
+    # Unsave the food if the user and the food exists
     if (request.method == 'PATCH' and user and food):
         session = storage.get_session()
-        save_delete = session.query(FoodSave).filter(FoodSave.user_id == userjwt_id, FoodSave.food_id == food_id).first().delete()
+        save_delete = session.query(FoodSave).filter(FoodSave.user_id == user.id, FoodSave.food_id == food_id).first().delete()
         return " ", 200
+    
+    # Get all saved foods for the user
+    if (request.method == 'GET' and user):
+        session = storage.get_session()
+        foods = session.query(Food).join(FoodSave).filter(FoodSave.user_id == user.id).all()
+        foods_list = []
+        for food in foods:
+            food_pic = url_for('app_views.get_image', filename='download.jpg', _external=True)
+            food_dict = {
+                'name': food.name,
+                'id': food.id,
+                'img': food_pic
+            }
+            foods_list.append(food_dict)
+        return jsonify(foods_list), 200
+
     return " ",  403

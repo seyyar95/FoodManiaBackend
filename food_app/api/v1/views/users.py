@@ -1,5 +1,5 @@
 from api.v1.views import app_views
-from flask import jsonify, request
+from flask import jsonify, request, current_app
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from api.v1 import app
 from werkzeug.utils import secure_filename
@@ -44,7 +44,17 @@ def register():
 
     # Save the user to the database
     new_user.save()
-    return jsonify({'message': 'User created successfully'}), 201
+     # Create an access token and a refresh token
+    access_token = create_access_token(identity=new_user.id)
+    refresh_token = create_refresh_token(identity=new_user.id)
+    
+    # Return the access and refresh tokens
+    return jsonify(
+        {
+            "access": access_token,
+            "refresh": refresh_token
+        }
+    ), 201
 
  
 @app_views.route('/login',  methods=['POST'], strict_slashes=False)
@@ -102,12 +112,12 @@ def update_user():
         # Save the profile picture
         unique_filename = secure_filename(profile_pictrue.filename) + "_" + str(user.id)
 
-        profile_pictrue.save(os.path.join(app_views.config['PROFILE_PICTURES'], unique_filename))
+        profile_pictrue.save(os.path.join(current_app.config['PROFILE_PICTURES'], unique_filename))
         
         user.profile_pic = unique_filename
     user.save()
 
-    profile_pic_url = request.host_url.strip('/') +  os.path.join(app_views.config['PROFILE_PICTURES'], user.profile_pic)
+    profile_pic_url = request.host_url.strip('/') +  os.path.join(curren_app.config['PROFILE_PICTURES'], user.profile_pic)
 
     return jsonify({
         'message': 'User updated successfully',

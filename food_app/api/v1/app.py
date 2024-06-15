@@ -4,7 +4,7 @@ from api.v1.views import app_views
 from models import storage
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
-
+import os
 
 """
     Create a Flask app
@@ -21,10 +21,12 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
 app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=30)
 
 # Set folder for profile and food pictures
-PROFILE_PICTURES = '/static/uploads/profile_pics/'
-FOODS_PICTURES = '/static/uploads/foods_pics/'
+PROFILE_PICTURES = os.path.join(app.root_path, 'static', 'uploads', 'profile_pics')
+FOODS_PICTURES = os.path.join(app.root_path, 'static', 'uploads', 'foods_pic')
+
 app.config['PROFILE_PICTURES'] = PROFILE_PICTURES
 app.config['FOODS_PICTURES'] = FOODS_PICTURES
+
 
 # Create a JWTManager object
 jwt = JWTManager()
