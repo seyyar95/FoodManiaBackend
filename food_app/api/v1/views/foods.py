@@ -146,7 +146,7 @@ def get_food_details():
 
             food_dict['ingredients'].append({
                 'name': ingredient.name,
-                'img': ingredient_pic
+                'img': ingredient_pic,
                 'quantity': food_ingredient.quantity
             })
 
