@@ -101,7 +101,7 @@ def update_user():
     # Get the user by id
     user = storage.get_by_id(User, user_id)
     
-    # Return an error if the user is not found
+    # Update fields if provided in the request data
     if data.get('name'):
         user.name = data.get('name')
     if data.get('email'):
@@ -114,10 +114,10 @@ def update_user():
 
         profile_pictrue.save(os.path.join(current_app.config['PROFILE_PICTURES'], unique_filename))
         
-        user.profile_pic = unique_filename
+        user.profile_picture = unique_filename
     user.save()
 
-    profile_pic_url = request.host_url.strip('/') +  os.path.join(curren_app.config['PROFILE_PICTURES'], user.profile_pic)
+    profile_pic_url = request.host_url.strip('/') +  os.path.join(curren_app.config['PROFILE_PICTURES'], user.profile_picture)
 
     return jsonify({
         'message': 'User updated successfully',

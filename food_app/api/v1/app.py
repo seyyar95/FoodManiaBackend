@@ -36,6 +36,7 @@ jwt.init_app(app)
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
 
 
+
 # app context to reload storage
 with app.app_context():
     storage.reload()
