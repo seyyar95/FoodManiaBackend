@@ -49,38 +49,13 @@ def get_foods_by_ingredient():
         food_dict = {
             'name': food.name,
             'id': food.id,
-            'img': food_pic,
+            'img': food.img,
             'saved': any(saved.user_id == user_id for saved in food.foodsave)
         }
         
         foods_list.append(food_dict)
 
     return jsonify(foods_list), 200
-
-    # food1 = Food(name="Three sister Dolma", steps="Dough, sauce, cheese")
-    # food1.save()
-    # food2 = Food(name="Pasta", steps="Noodles, sauce")
-    # food2.save()
-    # food3 = Food(name="Pizza", steps="Dough, sauce, cheese")
-    # food3.save()
-
-    # ingredient1 = Ingredient(name="Tomato")
-    # ingredient1.save()
-    # ingredient2 = Ingredient(name="Cheese")
-    # ingredient2.save()
-    # ingredient3 = Ingredient(name="Flour")
-    # ingredient3.save()
-
-    # food_ingredient1 = FoodIngredient(food=food1, ingredient=ingredient1, quantity=2)
-    # food_ingredient1.save()
-    # food_ingredient2 = FoodIngredient(food=food1, ingredient=ingredient2, quantity=1)
-    # food_ingredient2.save()
-    # food_ingredient3 = FoodIngredient(food=food2, ingredient=ingredient3, quantity=3)
-    # food_ingredient3.save()
-    # food_ingredient4 = FoodIngredient(food=food3, ingredient=ingredient1, quantity=2)
-    # food_ingredient4.save()
-    # food_ingredient5 = FoodIngredient(food=food3, ingredient=ingredient2, quantity=1)
-    # food_ingredient5.save()
 
 
 @app_views.route('/search_foods_by_name',  methods=['GET'], strict_slashes=False)
@@ -103,15 +78,15 @@ def get_food_by_names():
     foods_to_get = [food for food in all_foods.values() if search_name in food.name]
 
     food_pic = url_for('app_views.get_image', filename='download.jpg', _external=True)
-    
+
     foods_to_show = []
     # Create a dictionary with the food data if the food is found
     for food in foods_to_get:
         food_dict = {
-            'name': food.name,
-            'id': food.id,
-            'img': food_pic,
-            'saved': any(saved.user_id == user_id for saved in food.foodsave)
+           'name': food.name,
+           'id': food.id,
+           'img': food.img,
+           'saved': any(saved.user_id == user_id for saved in food.foodsave)
         }
 
         foods_to_show.append(food_dict)
@@ -142,6 +117,9 @@ def get_food_details():
 
     # Create a dictionary with the food data
     food_dict = { 
+        'description': food.description,
+        'time': food.time,
+        'degree': food.degree,
         'steps': food.steps.split('|'),
         'ingredients': []
     }
@@ -210,7 +188,7 @@ def save_food():
             food_dict = {
                 'name': food.name,
                 'id': food.id,
-                'img': food_pic,
+                'img': food.img,
                 'saved': True
             }
 
@@ -218,3 +196,89 @@ def save_food():
 
         # Return the list of saved foods    
         return jsonify(foods_list), 200
+
+
+@app_views.route('/daily_suggestion', methods=['GET'], strict_slashes=False)
+def daily_suggestion():
+    pass
+
+
+
+
+
+@app_views.route('/add_data', methods=['GET'], strict_slashes=False)
+def add_data():
+    food1 = Food(name="Three sister Dolma", steps="Dough |sauce |cheese", description="Dolma are a wide array of stuffed vegetables commonly found in Middle Eastern cuisine, but today we're making the popular 3 Sisters Dolma dish, which consists of eggplants, tomatoes, and peppers stuffed with a seasoned ground beef filling and served in an aromatic tomato sauce. Prepared outside over an open flame, this is the perfect recipe for your next big cookout!", time="1 hour", degree="100", img="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqAdpVUMKiEMenczu4AuIwvsyYI3AAWKM0BYDkgNVXKK8bPIWmiJv1F3aqZvTvy7QEzxnuaSqCQXW-YRMTc2qqrpN9S1fRTlg3GM1liCkNajI4ZykzGpxbOX0KaDK_pAekFsrrW8O2j7Nx/s400/34258478_1056565737824585_2186393504786153472_n.jpg")
+    food1.save()
+    food3 = Food(name="Pizza", steps="Dough |sauce |cheese", description="This moderately spicy and super hearty pizza includes spicy salami and fresh tomatoes. This pizza will please even the most demanding gourmet.", time="30 mins", degree="80", img="https://pizza.az/upload/resize_cache/iblock/809/359_355_040cd750bba9870f18aada2478b24840a/80956e09d302a120d49b6fd1071fe5b7.jpg")
+    food3.save()
+
+    ingredient2 = Ingredient(name="Cheese")
+    ingredient2.save()
+    ingredient3 = Ingredient(name="Flour")
+    ingredient3.save()
+    tomato = Ingredient(name="Tomato")
+    tomato.save()
+
+    food_ingredient1 = FoodIngredient(food=food1, ingredient=tomato, quantity=2)
+    food_ingredient1.save()
+    food_ingredient2 = FoodIngredient(food=food1, ingredient=ingredient2, quantity=1)
+    food_ingredient2.save()
+    food_ingredient4 = FoodIngredient(food=food3, ingredient=tomato, quantity=2)
+    food_ingredient4.save()
+    food_ingredient5 = FoodIngredient(food=food3, ingredient=ingredient2, quantity=1)
+    food_ingredient5.save()
+
+    # food1 = Food(name="3 sister dolma", steps="Mix ground meat and onions together and brown in a large pan. | Add small amount of butter to prevent burning. | While meat is cooking, bring a large pot of water to a boil with a pinch of salt. | Add eggplant and boil for around 5 minutes, or until soft. | Remove from water and set aside to cool. | Slice tops off of bell peppers and tomatoes and set aside. | Dig out seeds and pulp from tomatoes and green peppers. | Save the insides of the tomatoes for later. | Salt and pepper the insides of the tomatoes and peppers and set aside. | Rub eggplants between hands until soft. | Cut deep slits in eggplants and remove most of the middle. | Salt and pepper the insides of the eggplant. | Add insides of tomatoes and basil to the meat. | Add cinnamon and mix. | Stuff tomatoes, peppers, and eggplants with meat. | Spread green beans out in the pan. | Place stuffed veggies on top and add enough water to cover the bottoms. | Steam over medium heat for 20 minutes or until soft then serve.",)
+    # food1.save()
+    # food1.img = "3_sister_dolma" + str(food1.id)
+    # storage.save()
+    # ground_mutton = Ingredient(name="Ground Mutton")
+    # ground_mutton.save()
+    # onion = Ingredient(name="Onion")
+    # onion.save()
+    # green_bell_pepper = Ingredient(name="Green Bell Pepper")
+    # green_bell_pepper.save()
+    # eggplant = Ingredient(name="Eggplant")
+    # eggplant.save()
+    # green_bean = Ingredient(name="Green Bean")
+    # green_bean.save()
+    # basil = Ingredient(name="Basil")
+    # basil.save()
+    # cinnamon = Ingredient(name="Cinnamon")
+    # cinnamon.save()
+    # butter = Ingredient(name="Butter")
+    # butter.save()
+    # water = Ingredient(name="Water")
+    # water.save()
+    # salt = Ingredient(name="Salt")
+    # salt.save()
+    # black_pepper = Ingredient(name="Black Pepper")
+    # black_pepper.save()
+
+    # food_ingredient = FoodIngredient(food=food1, ingredient=ground_mutton, quantity="4 cups")
+    # food_ingredient.save()
+    # food_ingredient2 = FoodIngredient(food=food1, ingredient=onion, quantity="1 yellow onion")
+    # food_ingredient2.save()
+    # food_ingredient3 = FoodIngredient(food=food1, ingredient=green_bell_pepper, quantity="6")
+    # food_ingredient3.save()
+    # food_ingredient4 = FoodIngredient(food=food1, ingredient=eggplant, quantity="6")
+    # food_ingredient4.save()
+    # food_ingredient5 = FoodIngredient(food=food1, ingredient=green_bean, quantity="1-2 cups")
+    # food_ingredient5.save()
+    # food_ingredient6 = FoodIngredient(food=food1, ingredient=basil, quantity="3 tablespoons")
+    # food_ingredient6.save()
+    # food_ingredient7 = FoodIngredient(food=food1, ingredient=cinnamon, quantity="1 teaspoon")
+    # food_ingredient7.save()
+    # food_ingredient8 = FoodIngredient(food=food1, ingredient=butter, quantity="2 tablespoons")
+    # food_ingredient8.save()
+    # food_ingredient9 = FoodIngredient(food=food1, ingredient=water, quantity="1/2 cup")
+    # food_ingredient9.save()
+    # food_ingredient10 = FoodIngredient(food=food1, ingredient=salt, quantity="2 teaspoon")
+    # food_ingredient10.save()
+    # food_ingredient11 = FoodIngredient(food=food1, ingredient=black_pepper, quantity="2 teaspoon")
+    # food_ingredient11.save()
+    # food_ingredient12 = FoodIngredient(food=food1, ingredient=tomato, quantity="6")
+    # food_ingredient12.save()
+
+

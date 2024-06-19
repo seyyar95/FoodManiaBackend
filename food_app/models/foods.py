@@ -13,7 +13,10 @@ class Food(BaseModel, Base):
     __tablename__ = 'foods'
     name = Column(String(128), nullable=False, unique=True)
     steps = Column(Text, nullable=False)
-    img = Column(String(128), nullable=True)
+    description = Column(Text, nullable=False)
+    time = Column(String(60), nullable=False)
+    degree = Column(String(60), nullable=False)
+    img = Column(String(1044), nullable=True)
 
     # Define the many-to-many relationship between foods and ingredients
     ingredients = relationship("FoodIngredient", back_populates="food")
