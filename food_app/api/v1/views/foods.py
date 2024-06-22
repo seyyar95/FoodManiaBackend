@@ -201,7 +201,9 @@ def save_food():
 
 
 @app_views.route('/daily_suggestion', methods=['GET'], strict_slashes=False)
+@jwt_required()
 def daily_suggestion():
+    user_id = get_jwt_identity()
     daily_foods_id  = list(storage.all(DailySuggestion).values())
     food_list = []
     for food in daily_foods_id:
@@ -210,7 +212,8 @@ def daily_suggestion():
             food_dict = {
                 'name': foods.name,
                 'id': foods.id,
-                'img': foods.img
+                'img': foods.img,
+                'saved': any(saved.user_id == user_id for saved in foods.foodsave)
             }
             food_list.append(food_dict)
     return jsonify(food_list), 200

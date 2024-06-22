@@ -65,19 +65,19 @@ def page_not_found(e):
 
 def update_suggest():
     while True:
-        daily_foods  = set(storage.all(Food).values())
+        daily_foods  = list(storage.all(Food).values())
         suggested_foods: list[DailySuggestion] = list()
         for food in random.sample(daily_foods, 1):
             new = DailySuggestion(food_id=food.id)
             new.save()
             suggested_foods.append(new)
-        time.sleep(10)
+        time.sleep(100)
         for food in suggested_foods:
             food.delete()
     
 
 
-# Running Flask applocation in debug mode
+# Running Flask application in debug mode
 if __name__ == '__main__':
     update = Thread(target=update_suggest)
     update.start()
