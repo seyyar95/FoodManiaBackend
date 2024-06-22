@@ -21,6 +21,7 @@ class Food(BaseModel, Base):
     # Define the many-to-many relationship between foods and ingredients
     ingredients = relationship("FoodIngredient", back_populates="food")
     foodsave = relationship("FoodSave", back_populates="food")
+    suggestion = relationship("DailySuggestion", back_populates="food")
 
     @classmethod
     def get_foods_by_ingredients(cls, ingredients):

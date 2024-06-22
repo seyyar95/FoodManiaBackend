@@ -1,9 +1,14 @@
+from datetime import timedelta
+import random
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from api.v1.views import app_views
+from models.daily_suggest import DailySuggestion
+from models.foods import Food
 from models import storage
 from flask_jwt_extended import JWTManager
-from datetime import timedelta
+from threading import Thread
+import time
 import os
 
 """
@@ -58,7 +63,23 @@ def page_not_found(e):
     return jsonify({'error': 'Not found'}), 404
 
 
+def update_suggest():
+    while True:
+        daily_foods  = set(storage.all(Food).values())
+        suggested_foods: list[DailySuggestion] = list()
+        for food in random.sample(daily_foods, 1):
+            new = DailySuggestion(food_id=food.id)
+            new.save()
+            suggested_foods.append(new)
+        time.sleep(10)
+        for food in suggested_foods:
+            food.delete()
+    
+
+
 # Running Flask applocation in debug mode
 if __name__ == '__main__':
+    update = Thread(target=update_suggest)
+    update.start()
     app.register_blueprint(app_views)
     app.run(host='0.0.0.0', port=5000, threaded=True, debug=True)

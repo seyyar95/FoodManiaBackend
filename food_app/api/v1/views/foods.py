@@ -1,6 +1,7 @@
 from api.v1.views import app_views
 from flask import jsonify, request, current_app, url_for, send_file
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from models.daily_suggest import DailySuggestion
 from models.users import User
 from models.foods import Food
 from models.ingredients import Ingredient
@@ -8,6 +9,7 @@ from models.food_ingredient import FoodIngredient
 from models.foodsave import FoodSave
 from models import storage
 import os
+import random
 
 
 
@@ -200,8 +202,18 @@ def save_food():
 
 @app_views.route('/daily_suggestion', methods=['GET'], strict_slashes=False)
 def daily_suggestion():
-    pass
-
+    daily_foods_id  = list(storage.all(DailySuggestion).values())
+    food_list = []
+    for food in daily_foods_id:
+        foods = storage.get_by_id(Food ,food.food_id)
+        if foods:
+            food_dict = {
+                'name': foods.name,
+                'id': foods.id,
+                'img': foods.img
+            }
+            food_list.append(food_dict)
+    return jsonify(food_list), 200
 
 
 
