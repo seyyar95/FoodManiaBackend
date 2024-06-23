@@ -90,38 +90,30 @@ def login():
     ), 200
 
 
-@app_views.route('/update',  methods=['PATCH'], strict_slashes=False)
-@jwt_required()
+@app_views.route('/update',  methods=['PATCH', 'GET'], strict_slashes=False)
+# @jwt_required()
 def update_user():
     # Get the data from the request
-    data = request.get_json()
-    user_id = get_jwt_identity()
-    profile_pictrue = request.files['profile_pic']
+    # user_id = get_jwt_identity()
     
     # Get the user by id
-    user = storage.get_by_id(User, user_id)
+    user = storage.get_by_id(User, 2)
     
-    # Update fields if provided in the request data
-    if data.get('name'):
-        user.name = data.get('name')
-    if data.get('email'):
-        user.email = data.get('email')
-    if data.get('password'):
-        user.set_password(data.get('password'))
-    if profile_pictrue:
-        # Save the profile picture
-        unique_filename = secure_filename(profile_pictrue.filename) + "_" + str(user.id)
-
-        profile_pictrue.save(os.path.join(current_app.config['PROFILE_PICTURES'], unique_filename))
-        
-        user.profile_picture = unique_filename
-    user.save()
-
-    profile_pic_url = request.host_url.strip('/') +  os.path.join(curren_app.config['PROFILE_PICTURES'], user.profile_picture)
+    if request.method == 'PATCH':
+        print('salam')
+        data = request.get_json()
+    
+    
+        # Update fields if provided in the request data
+        if data.get('name'):
+            user.name = data.get('name')
+        if data.get('email'):
+            user.email = data.get('email')
+        if data.get('password'):
+            user.set_password(data.get('password'))
+        user.save()
 
     return jsonify({
-        'message': 'User updated successfully',
         'name': user.name,
         'email': user.email,
-        'profile_pic_url': profile_pic_url
     }), 200

@@ -16,7 +16,7 @@ class Food(BaseModel, Base):
     description = Column(Text, nullable=False)
     time = Column(String(60), nullable=False)
     degree = Column(String(60), nullable=False)
-    img = Column(String(1044), nullable=True)
+    img = Column(String(1024), nullable=True)
 
     # Define the many-to-many relationship between foods and ingredients
     ingredients = relationship("FoodIngredient", back_populates="food")

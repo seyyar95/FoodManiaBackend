@@ -20,17 +20,15 @@ app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = 'a3f3217b1db812f16990d439'
 
 # Set the JWT expiration time
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(hours=1)
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=1)
 
 # Set the JWT refresh token expiration time
 app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=30)
 
 # Set folder for profile and food pictures
 PROFILE_PICTURES = os.path.join(app.root_path, 'static', 'uploads', 'profile_pics')
-FOODS_PICTURES = os.path.join(app.root_path, 'static', 'uploads', 'foods_pic')
 
 app.config['PROFILE_PICTURES'] = PROFILE_PICTURES
-app.config['FOODS_PICTURES'] = FOODS_PICTURES
 
 
 # Create a JWTManager object
@@ -67,19 +65,20 @@ def update_suggest():
     while True:
         daily_foods  = list(storage.all(Food).values())
         suggested_foods: list[DailySuggestion] = list()
-        for food in random.sample(daily_foods, 1):
+        foods = random.sample(daily_foods, 3)
+        for food in foods:
             new = DailySuggestion(food_id=food.id)
             new.save()
             suggested_foods.append(new)
-        time.sleep(100)
+        time.sleep(10)
         for food in suggested_foods:
             food.delete()
     
 
 
-# Running Flask application in debug mode
+# Running Flask application
 if __name__ == '__main__':
     update = Thread(target=update_suggest)
     update.start()
     app.register_blueprint(app_views)
-    app.run(host='0.0.0.0', port=5000, threaded=True, debug=True)
+    app.run(host='0.0.0.0', port=5000, threaded=True)

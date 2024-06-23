@@ -9,7 +9,7 @@ class Ingredient(BaseModel, Base):
     """
     __tablename__ = 'ingredients'
     name = Column(String(128), nullable=False)
-    img = Column(String(128), nullable=True)
+    img = Column(String(1024), nullable=True)
 
     # Define the many-to-many relationship between ingredients and foods
     foods = relationship("FoodIngredient", back_populates="ingredient")
