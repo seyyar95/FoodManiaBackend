@@ -14,23 +14,3 @@ class Ingredient(BaseModel, Base):
     # Define the many-to-many relationship between ingredients and foods
     foods = relationship("FoodIngredient", back_populates="ingredient")
 
-    @classmethod
-    def get_ingredients_ids(cls, ingredients):
-        """
-        Class method to get ingredient ids
-        """
-
-        # Get the database session
-        session = storage.get_session()
-
-        ingredients_ids = []
-        for ingredient in ingredients:
-            # Query the database for the ingredient
-            ingredient = session.query(cls).filter_by(name=ingredient).first()
-            if ingredient:
-                ingredients_ids.append({
-                    'name': ingredient.name,
-                    'id': ingredient.id}
-                    )
-        return ingredients_ids
-

@@ -123,40 +123,40 @@ def get_food_details():
     return jsonify(food_dict), 200
 
 
-@app_views.route('/save', methods=['GET', 'POST', 'PATCH'], strict_slashes=False)
+@app_views.route('/save', methods=['GET', 'POST'], strict_slashes=False)
 @jwt_required()
 def save_food():
     # Get the user id from the JWT
-    userjwt_id = get_jwt_identity()
+    user_id = get_jwt_identity()
 
     session = storage.get_session()
-    user = storage.get_by_id(User, userjwt_id)
+    user = storage.get_by_id(User, user_id)
     
     # Create a new FoodSave object and save it to the database if the user and the food exists
-    if (request.method == 'POST' and user):
+    if request.method == 'POST' and user:
         data = request.get_json()
         food_id = data.get('food_id')
 
         food = storage.get_by_id(Food, food_id)
 
-        save_second = session.query(FoodSave).filter(FoodSave.user_id == user.id, FoodSave.food_id == food.id).first()
+        already_saved = session.query(FoodSave).filter(FoodSave.user_id == user.id, FoodSave.food_id == food.id).first()
 
-        if(save_second):
-            save_delete = session.query(FoodSave).filter(FoodSave.user_id == user.id, FoodSave.food_id == food_id).first().delete()
+        if already_saved:
+            session.query(FoodSave).filter(FoodSave.user_id == user.id, FoodSave.food_id == food_id).first().delete()
 
             return jsonify({
             "id": food_id
-        }), 200
+            }), 200
 
-        save = FoodSave(user_id = userjwt_id, food_id = food_id)
-        save.save()
+        save_food = FoodSave(user_id = user_id, food_id = food_id)
+        save_food.save()
 
         return jsonify({
             "id": food_id
         }), 201
     
     # Get all saved foods for the user
-    if (request.method == 'GET' and user):
+    if request.method == 'GET' and user:
         session = storage.get_session()
 
         # Query the database for the foods saved by the user

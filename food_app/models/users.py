@@ -13,7 +13,6 @@ class User(BaseModel, Base):
     name = Column(String(128), nullable=False)
     email = Column(String(128), nullable=False, unique=True)
     password_hash = Column(String(256), nullable=False)
-    profile_picture = Column(String(128), nullable=True)
 
     # Define the many-to-many relationship between users and foods
     usersave = relationship("FoodSave", back_populates="user")

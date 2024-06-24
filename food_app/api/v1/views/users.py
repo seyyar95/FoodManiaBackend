@@ -90,17 +90,16 @@ def login():
     ), 200
 
 
-@app_views.route('/update',  methods=['PATCH', 'GET'], strict_slashes=False)
-# @jwt_required()
+@app_views.route('/update',  methods=['GET', 'PATCH'], strict_slashes=False)
+@jwt_required()
 def update_user():
     # Get the data from the request
-    # user_id = get_jwt_identity()
+    user_id = get_jwt_identity()
     
     # Get the user by id
-    user = storage.get_by_id(User, 2)
+    user = storage.get_by_id(User, user_id)
     
     if request.method == 'PATCH':
-        print('salam')
         data = request.get_json()
     
     
@@ -108,7 +107,15 @@ def update_user():
         if data.get('name'):
             user.name = data.get('name')
         if data.get('email'):
-            user.email = data.get('email')
+            email = data.get('email')
+
+            # Validate the email
+            try:
+                valid_email = validate_email(email)
+            except EmailNotValidError as e:
+                return jsonify({'error': str(e)}), 400
+            
+            user.email = email
         if data.get('password'):
             user.set_password(data.get('password'))
         user.save()

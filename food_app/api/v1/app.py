@@ -65,7 +65,7 @@ def update_suggest():
     while True:
         daily_foods  = list(storage.all(Food).values())
         suggested_foods: list[DailySuggestion] = list()
-        foods = random.sample(daily_foods, 3)
+        foods = random.sample(daily_foods, 4)
         for food in foods:
             new = DailySuggestion(food_id=food.id)
             new.save()
