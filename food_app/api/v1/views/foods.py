@@ -203,25 +203,28 @@ def daily_suggestion():
 
 @app_views.route('/add_data', methods=['POST'], strict_slashes=False)
 def add_data():
-    data = request.get_json()
-    name = data.get('name')
-    description = data.get('description')
-    steps = data.get('steps')
-    time = data.get('time')
-    degree = data.get('degree')
-    img = data.get('img')
-    ingredients = data.get('ingredients')
+    datas = request.get_json()
+    for data in datas:
+        name = data.get('name')
+        description = data.get('description')
+        steps = data.get('steps')
+        time = data.get('time')
+        degree = data.get('degree')
+        img = data.get('img')
+        ingredients = data.get('ingredients')
 
-    food = Food(name=name, steps=steps, description=description, time=time, degree=degree, img=img)
-    food.save()
+        already_added = storage.get_by_name(Food, name)
+        if not already_added:
+            food = Food(name=name, steps=steps, description=description, time=time, degree=degree, img=img)
+            food.save()
 
-    for ing in ingredients:
-        existing_ing = storage.get_by_name(Ingredient, ing.get('name'))
-        if existing_ing:
-            foodingredient = FoodIngredient(food=food, ingredient=existing_ing, quantity=ing.get('quantity'))   
-        else:
-            ingredient = Ingredient(name=ing.get('name'), img=ing.get('img'))
-            ingredient.save()
-            foodingredient = FoodIngredient(food=food, ingredient=ingredient, quantity=ing.get('quantity'))
-        foodingredient.save()
+            for ing in ingredients:
+                existing_ing = storage.get_by_name(Ingredient, ing.get('name'))
+                if existing_ing:
+                    foodingredient = FoodIngredient(food=food, ingredient=existing_ing, quantity=ing.get('quantity'))   
+                else:
+                    ingredient = Ingredient(name=ing.get('name'), img=ing.get('img'))
+                    ingredient.save()
+                    foodingredient = FoodIngredient(food=food, ingredient=ingredient, quantity=ing.get('quantity'))
+                foodingredient.save()
 
