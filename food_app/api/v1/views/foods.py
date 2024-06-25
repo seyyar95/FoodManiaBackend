@@ -35,7 +35,7 @@ def get_foods_by_ingredient():
     for food in foods:
         
         food_dict = {
-            'name': food.name,
+            'name': food.name.title(),
             'id': food.id,
             'img': food.img,
             'saved': any(saved.user_id == user_id for saved in food.foodsave)
@@ -51,7 +51,7 @@ def get_foods_by_ingredient():
 def get_food_by_names():
     # Get the data from the request
     data = request.get_json()
-    search_name = data.get('name')
+    search_name = data.get('name').strip().upper()
 
     # Get the user id from the JWT
     user_id = get_jwt_identity()
@@ -69,7 +69,7 @@ def get_food_by_names():
     # Create a dictionary with the food data if the food is found
     for food in foods_to_get:
         food_dict = {
-           'name': food.name,
+           'name': food.name.title(),
            'id': food.id,
            'img': food.img,
            'saved': any(saved.user_id == user_id for saved in food.foodsave)
@@ -168,7 +168,7 @@ def save_food():
         for food in foods:
             
             food_dict = {
-                'name': food.name,
+                'name': food.name.title(),
                 'id': food.id,
                 'img': food.img,
                 'saved': True
@@ -190,7 +190,7 @@ def daily_suggestion():
         foods = storage.get_by_id(Food ,food.food_id)
         if foods:
             food_dict = {
-                'name': foods.name,
+                'name': foods.name.title(),
                 'id': foods.id,
                 'img': foods.img,
                 'saved': any(saved.user_id == user_id for saved in foods.foodsave)
@@ -205,7 +205,7 @@ def daily_suggestion():
 def add_data():
     datas = request.get_json()
     for data in datas:
-        name = data.get('name')
+        name = data.get('name').upper()
         description = data.get('description')
         steps = data.get('steps')
         time = data.get('time')

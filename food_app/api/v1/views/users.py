@@ -13,8 +13,8 @@ import os
 def register():
     # Get the data from the request
     data = request.get_json()
-    name = data.get('name')
-    email = data.get('email')
+    name = data.get('name').strip()
+    email = data.get('email').strip()
 
     # Validate the email
     try:
@@ -61,7 +61,7 @@ def register():
 def login():
     # Get the data from the request
     data = request.get_json()
-    email = data.get('email')
+    email = data.get('email').strip()
     password = data.get('password')
 
     # Return an error if the email or password is not provided

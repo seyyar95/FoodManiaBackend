@@ -62,6 +62,10 @@ def page_not_found(e):
 
 
 def update_suggest():
+    suggested_foods = storage.all(DailySuggestion)
+    for food in suggested_foods.values():
+        food.delete()
+    
     while True:
         daily_foods  = list(storage.all(Food).values())
         suggested_foods: list[DailySuggestion] = list()
