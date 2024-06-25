@@ -107,15 +107,7 @@ def update_user():
         if data.get('name'):
             user.name = data.get('name')
         if data.get('email'):
-            email = data.get('email')
-
-            # Validate the email
-            try:
-                valid_email = validate_email(email)
-            except EmailNotValidError as e:
-                return jsonify({'error': str(e)}), 400
-            
-            user.email = email
+            user.email = data.get('email')
         if data.get('password'):
             user.set_password(data.get('password'))
         user.save()
