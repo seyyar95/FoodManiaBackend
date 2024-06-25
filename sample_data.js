@@ -36,7 +36,7 @@
                 "img": "https://static.thenounproject.com/png/3194109-200.png",
                 "name": "Egg",
                 "quantity": "4"
-            },
+            }
         ]
     },
     {
@@ -545,76 +545,6 @@
         ]
     },
     {
-        "name": "Paella",
-        "steps": "Heat oil in a large pan over medium heat. Add chicken, cook until browned.|Add onions, bell peppers, and garlic, cook until softened.|Stir in tomatoes, saffron, and paprika. Cook for a few minutes.|Add rice and stir to coat with the oil and spices.|Pour in broth, bring to a boil, then reduce to a simmer. Cook until rice is nearly tender.|Add seafood and peas, cook until seafood is done and rice is tender.|Let it rest for a few minutes before serving.",
-        "description": "A classic Spanish dish with a medley of chicken, seafood, and saffron-infused rice.",
-        "time": "1 hour 30 minutes",
-        "degree": "200",
-        "img": "https://upload.wikimedia.org/wikipedia/commons/7/7b/PaellaMixta.jpg",
-        "ingredients": [
-            {
-                "img": "https://static.thenounproject.com/png/361776-200.png",
-                "name": "Olive Oil",
-                "quantity": "3 tbsp"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/361776-200.png",
-                "name": "Chicken",
-                "quantity": "500 gr"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/704534-200.png",
-                "name": "Onion",
-                "quantity": "1"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/704530-200.png",
-                "name": "Bell Pepper",
-                "quantity": "1"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/1435835-200.png",
-                "name": "Garlic",
-                "quantity": "3 cloves"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/3771-200.png",
-                "name": "Tomato",
-                "quantity": "2"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/1422528-200.png",
-                "name": "Saffron",
-                "quantity": "1/4 tsp"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/257248-200.png",
-                "name": "Paprika",
-                "quantity": "1 tsp"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/728153-200.png",
-                "name": "Rice",
-                "quantity": "2 cups"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/1315107-200.png",
-                "name": "Broth",
-                "quantity": "4 cups"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/878350-200.png",
-                "name": "Seafood Mix",
-                "quantity": "500 gr"
-            },
-            {
-                "img": "https://static.thenounproject.com/png/2945874-200.png",
-                "name": "Peas",
-                "quantity": "1 cup"
-            }
-        ]
-    },
-    {
         "name": "Ratatouille",
         "steps": "Preheat oven to 375°F (190°C).|In a large skillet, heat olive oil over medium heat. Add onions and garlic, cook until softened.|Add bell peppers, zucchini, and eggplant. Cook until just tender.|Stir in tomatoes, basil, thyme, salt, and pepper. Simmer for 10 minutes.|Transfer the mixture to a baking dish. Arrange slices of vegetables (tomatoes, zucchini, eggplant) on top in an alternating pattern.|Drizzle with olive oil, season with salt and pepper.|Bake for 45-50 minutes until vegetables are tender and slightly browned.|Serve warm with fresh basil on top.",
         "description": "A traditional French Provençal stewed vegetable dish, perfect for a healthy and colorful meal.",
@@ -671,6 +601,51 @@
                 "img": "https://static.thenounproject.com/png/705369-200.png",
                 "name": "Salt",
                 "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/1576615-200.png",
+                "name": "Black Pepper",
+                "quantity": "1/2 tsp"
+            }
+        ]
+    },
+    {
+        "name": "Loaded Tornado Potato",
+        "steps": "Preheat a fan-assisted oven to 180°C fan / 400°F and line a large baking tray with baking paper.|Wash and dry the potatoes, then push a skewer through the middle of each potato lengthways.|Using a sharp knife, carefully carve each potato at an angle into a spiral. Cut down as far as the skewer, cutting diagonally along the potato so each spiral is roughly 0.5 cm thick. Then transfer both potatoes to the pre-lined baking tray.|Combine the olive oil, salt, pepper, paprika, garlic powder and cumin powder in a small bow. Then brush over the potatoes on both sides, making sure the spirals are completey coated.|Add the baking tray to the oven and bake the potatoes for 50-60 minutes, turning over half way to make sure the potatoes are crispy all over. The thicker your spirals, the longer the potato will need to cook in the oven! If the potato is slightly undercooked, leave it in the oven for another 10-15 minutes.|To serve, drizzle with yoghurt, dried onion flakes, coriander and chilli sauce. It’s up to you how many toppings you want to use!",
+        "description": "A loaded tornado potato is a variation of the traditional tornado potato that is enhanced with a variety of toppings and ingredients, similar to a loaded baked potato. It is often seasoned with various spices or flavored powders, and sometimes served with dipping sauces.",
+        "time": "1 hour",
+        "degree": "100",
+        "img": "https://www.wearesovegan.com/wp-content/uploads/2018/05/SV_TornadoPotato_Header3.jpg",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/3634217-200.png",
+                "name": "Olive Oil",
+                "quantity": "2 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/2764108-200.png",
+                "name": "Potato",
+                "quantity": "2"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/1435835-200.png",
+                "name": "Garlic powder",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/4666001-200.png",
+                "name": "Paprika",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/4751124-200.png",
+                "name": "Cumin Powder",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/705369-200.png",
+                "name": "Salt",
+                "quantity": "1/2 tsp"
             },
             {
                 "img": "https://static.thenounproject.com/png/1576615-200.png",
