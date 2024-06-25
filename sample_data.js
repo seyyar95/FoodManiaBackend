@@ -563,7 +563,7 @@
                 "quantity": "1"
             },
             {
-                "img": "https://static.thenounproject.com/png/1435835-200.png",
+                "img": "https://static.thenounproject.com/png/41709-200.png",
                 "name": "Garlic",
                 "quantity": "3 cloves"
             },
@@ -651,6 +651,306 @@
                 "img": "https://static.thenounproject.com/png/1576615-200.png",
                 "name": "Black Pepper",
                 "quantity": "1/2 tsp"
+            }
+        ]
+    },
+    {
+        "name": "Balig Lavangi",
+        "steps": "Rinse the fish under cold water and pat dry with paper towel. Rub inside and out with salt and pepper.|Prepare the filling. Place the onion on a fine sieve and press to remove the juices. In a mixing bowl, combine onion, walnuts, sour paste or dried sour plums, or pomegranate seeds, and salt and pepper. Mix well. Adjust seasoning to taste.|Preheat the oven to 350F (180C).|Using a spoon, fill the cavity of the fish with the walnut stuffing. Make sure you pack the mixture tightly inside.|Pin the cavity shut with wooden barbecue skewers or cocktail sticks. Or, if available, sew it up tightly with kitchen twine. Place the fish on a baking sheet and pour the lemon juice over it. If you sewed the cavity, place the fish on a baking sheet in an upright position, seam side down. It looks beautiful when you remove it from the oven and place it on a platter in that position. If you used skewers like me just lay the fish on one side. Bake in the oven for about 45 minutes, or until the fish is browned and flakes easily with a fork.|Arrange the fish on a serving platter and discard the pins or twine. Garnish with lemon slices, pomegranate seeds and serve with rice pilaff or bread and pomegranate paste (Narsharab) on the side. When serving, slice the fish into pieces making sure each one has some filling inside.",
+        "description": "Lavangi is a stuffed chicken breast recipe from Azerbaijan. The filling is made with onions, walnuts, prunes, and raisins, and the chicken breast is rubbed with plum preserves. A little sweet, a little salty, and a whole lotta delicious!",
+        "time": "45 mins",
+        "degree": "180",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNtwzt3VNrGnP4gSqllc45c_d6cdmaqiKy_g&s",
+        "ingredients": [
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-hqX0E3acBj298Lo7L8Ez86Xu9aKJ7GwPXQ&s",
+                "name": "Walnut",
+                "quantity": "1/2 cup"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/26154-200.png",
+                "name": "Onion",
+                "quantity": "1"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzIpO3VRiLz2K4y2iUXJ6trm_57APePWT94A&s",
+                "name": "Pomegranate",
+                "quantity": "1"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjKOWzu3-KlTdZ9OXJBYEX5OMy-WsMPPIYRA&s",
+                "name": "Plum",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9iJTXKdOhs0-9CDihbSeMJxqtHkeBxpeV2Q&s",
+                "name": "Lemon Juice",
+                "quantity": "3 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/705369-200.png",
+                "name": "Salt",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/1576615-200.png",
+                "name": "Black Pepper",
+                "quantity": "1/4 tsp"
+            }
+        ]
+    },
+    {
+        "name": "Doner Kebab",
+        "steps": "Heat the oven to 200C/180C fan/gas 6. Tip all the ingredients except the oil into a food processor with a large pinch of salt and lots of ground pepper. Pulse until everything is combined and chopped together. You can also just squish everything together in a bowl but this will give you a looser finish.|Oil a large sheet of foil, tip the meat mix in the middle and mould to a very thick sausage, roughly the shape of an aubergine. Roll up the foil tightly, twisting up the ends to create a Christmas cracker shape.|Lay on a shallow roasting tin and roast in the oven for 35-40 mins, turning occasionally, or until a digital cooking thermometer reads 75C when pierced in the middle. Leave the kebab to cool a little, then unwrap the foil. Place back on the tray and brown under the grill or with a blowtorch.|Place on a board and carve into thin slices. For full doner mode, you can hold the kebab up with a roasting fork or metal skewer and carve. Serve with warm pitta bread and any of the other accompaniments, including our chilli sauce and garlic yogurt sauce.",
+        "description": "Döner kebab, which takes its name from the Turkish words meaning “rotating meat,” is similar to shawarma and gyros: the meat is sliced, stacked, and roasted on a vertical spit and then carved off the spit and served in pita or some other flatbread.",
+        "time": "50 mins",
+        "degree": "180",
+        "img": "https://www.hairybikers.com/uploads/images/_recipeImage/898/kebab.jpg",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/2969014-200.png",
+                "name": "Lamb Mince",
+                "quantity": "500 gr"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/41709-200.png",
+                "name": "Garlic",
+                "quantity": "4 cloves"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/1035797-200.png",
+                "name": "Bread",
+                "quantity": "100 gr"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRly0grBcFkm6AaB9BvfU8xmde9Mlfz-g5SZw&s",
+                "name": "Paprika Powder",
+                "quantity": "1/4 tsp"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB2NDYXCpwoOnWMv_BNhVDsT0XaDSp0B9WCw&s",
+                "name": "Sunflower oil",
+                "quantity": "1 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/4751124-200.png",
+                "name": "Cumin POwder",
+                "quantity": "2 tsp"
+            }
+        ]
+    },
+    {
+        "name": "Kumpir",
+        "steps": "Preheat the oven to 400 degrees F. Wash and dry the potatoes thoroughly. Poke a few holes in each potato using a fork and wrap them in aluminum foil. Place the potatoes on a baking sheet and bake them in the oven for 1 hour until they're fully cooked. You know the potatoes are fully baked when you can easily insert a knife in them.|While the potatoes are baking, prepare the toppings in bowls and plates and have them ready on the table. You can make kisir, ezme, pickled cabbage and Russian salad in advance.|Once the potatoes are ready, let them cool for 5 minutes so you're able to handle them. Unwrap the potatoes and split them in half, leaving one side intact. Fluff the potato using a fork and add the butter and cheese with a pinch of salt. Fluff again so the potato is smooth.|Stuff the potatoes with your favorite toppings and serve immediately.",
+        "description": "Kumpir are Turkish style baked potatoes - once they come out of the oven they are cut open and the soft potato inside is mixed together with butter and cheese until it's smooth and creamy. Then add your favourite toppings...think loaded baked potatoes taken to the next level.",
+        "time": "50 mins",
+        "degree": "180",
+        "img": "https://images.deliveryhero.io/image/fd-tr/LH/ydxu-hero.jpg?width=512&height=384&quality=45",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/2764108-200.png",
+                "name": "Potato",
+                "quantity": "1"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/13490-200.png",
+                "name": "Butter",
+                "quantity": "2 tbsp"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjBNwiUZLu1D9gj0cGiDxPmeQTnHM_N3uKIQ&s",
+                "name": "Mozzarella",
+                "quantity": "50 gr"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRly0grBcFkm6AaB9BvfU8xmde9Mlfz-g5SZw&s",
+                "name": "Paprika Powder",
+                "quantity": "1/4 tsp"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaOR0bMjopX7rq38BKVS-ZB_w0jSTt06YUWQ&s",
+                "name": "Corn",
+                "quantity": "2 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/2008417-200.png",
+                "name": "Chopped Olive",
+                "quantity": "1 tbsp"
+            }
+        ]
+    },
+    {
+        "name": "Lentil Soup",
+        "steps": "Heat the stock in a large pan and add the lentils. Bring to the boil and allow the lentils to soften for a few minutes.|Add the carrots and leeks, and season (don't add salt if you use ham stock as it will make it too salty). Bring to the boil, then reduce the heat, cover and simmer for 45 mins-1 hr until the lentils have broken down. Scatter over the parsley and serve with buttered bread, if you like.",
+        "description": "Lentils are widely cultivated throughout Europe, Asia, and North Africa but are little grown in the Western Hemisphere. The seeds are used chiefly in soups and stews, and the herbage is used as fodder in some places.",
+        "time": "1 hour",
+        "degree": "100",
+        "img": "https://www.noracooks.com/wp-content/uploads/2018/11/square-1-500x500.jpg",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/4012690-200.png",
+                "name": "Red Lentil",
+                "quantity": "150 gr"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyP34Xi329rAlRWBpSL2pQk0mJrnb1KRvHVg&s",
+                "name": "Carrot",
+                "quantity": "6"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/65226-200.png",
+                "name": "Leek",
+                "quantity": "2"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRly0grBcFkm6AaB9BvfU8xmde9Mlfz-g5SZw&s",
+                "name": "Paprika Powder",
+                "quantity": "1/4 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/856095-200.png",
+                "name": "Parsley",
+                "quantity": "1 bunch"
+            }
+        ]
+    },
+    {
+        "name": "Chicken Noodle Soup",
+        "steps": "In a large pot, heat olive oil over medium heat. Add the onion, carrots, and celery and cook until softened.|Add the chicken, broth, and bay leaf. Bring to a boil, then reduce heat and simmer for 30 minutes. Remove the chicken and shred it. Return the chicken to the pot, add the noodles, and cook until tender. Season with salt and pepper to taste. Serve with fresh parsley.",
+        "description": "A comforting soup made with tender chicken, noodles, and vegetables in a flavorful broth.",
+        "time": "1 hour",
+        "degree": "85",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfaXEOshnLMO3jXuF-BXI8dm7NaRlf0qIlzQ&s",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/3634217-200.png",
+                "name": "Olive Oil",
+                "quantity": "2 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/26154-200.png",
+                "name": "Onion",
+                "quantity": "1"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyP34Xi329rAlRWBpSL2pQk0mJrnb1KRvHVg&s",
+                "name": "Carrot",
+                "quantity": "3"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/4016689-200.png",
+                "name": "Celery",
+                "quantity": "3 stalks"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/224966-200.png",
+                "name": "Chicken",
+                "quantity": "2 breasts"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRj7qLyz-nJUaqGP88ckdgua1i6kfPlf0JULw&s",
+                "name": "Chicken Broth",
+                "quantity": "8 cups"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/4436920-200.png",
+                "name": "Noodle",
+                "quantity": "2 cups"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/844939-200.png",
+                "name": "Bay Leaf",
+                "quantity": "1"
+            }
+        ]
+    },
+    {
+        "name": "French Fries",
+        "steps": "Peel the potatoes and cut them into thin strips.|Soak the potato strips in cold water for at least 30 minutes. Drain and pat them dry with a paper towel.|Heat oil in a deep fryer or large pot to 350°F (175°C). Fry the potatoes in batches until they are golden brown and crispy, about 3-4 minutes per batch. Remove the fries with a slotted spoon and drain on paper towels. Season with salt while still hot. Serve immediately.",
+        "description": "Classic French fries, crispy on the outside and fluffy on the inside. Perfect as a side dish or snack.",
+        "time": "1 hour",
+        "degree": "75",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-S6BmCEcWmhaWNy8QeBCTttMyOaRmzd6yjw&s",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/2764108-200.png",
+                "name": "Potato",
+                "quantity": "4"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSB2NDYXCpwoOnWMv_BNhVDsT0XaDSp0B9WCw&s",
+                "name": "Sunflower Oil",
+                "quantity": "1 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/705369-200.png",
+                "name": "Salt",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRly0grBcFkm6AaB9BvfU8xmde9Mlfz-g5SZw&s",
+                "name": "Paprika Powder",
+                "quantity": "1/2 tsp"
+            }
+        ]
+    },
+    {
+        "name": "Turkish Pide",
+        "steps": "In a large bowl, combine flour, yeast, sugar, and salt. Gradually add warm water and olive oil, kneading until a smooth dough forms. Cover and let rise for 1 hour.|Preheat the oven to 475°F (245°C). Divide the dough into equal portions and roll each portion into an oval shape.|Spread the desired filling (cheese, spinach, ground meat, etc.) in the center of each dough oval. Fold the edges over the filling and pinch the ends to form a boat shape.|Brush the edges with egg wash. Bake for 15-20 minutes until golden brown. Serve hot.",
+        "description": "Turkish Pide is a traditional flatbread filled with various toppings, similar to a pizza but with a unique boat shape.",
+        "time": "2 hours",
+        "degree": "90",
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSFlCztNdAFAk_LWGANieiJsV2ipOVpKTO3g&s",
+        "ingredients": [
+            {
+                "img": "https://static.thenounproject.com/png/174576-200.png",
+                "name": "Flour",
+                "quantity": "4 cup"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/129009-200.png",
+                "name": "Yeast",
+                "quantity": "7 gr"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/4180040-200.png",
+                "name": "Sugar",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/705369-200.png",
+                "name": "Salt",
+                "quantity": "1 tsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/1435835-200.png",
+                "name": "Warm Water",
+                "quantity": "1.5 cup"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/3634217-200.png",
+                "name": "Olive Oil",
+                "quantity": "2 tbsp"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/3194109-200.png",
+                "name": "Egg",
+                "quantity": "1"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/3369387-200.png",
+                "name": "Cheese",
+                "quantity": "2 cup"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/174587-200.png",
+                "name": "Spinach",
+                "quantity": "2 cup"
+            },
+            {
+                "img": "https://static.thenounproject.com/png/3625658-200.pngg",
+                "name": "Ground Beef",
+                "quantity": "900 gr"
             }
         ]
     }
