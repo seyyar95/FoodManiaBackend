@@ -25,11 +25,6 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=1)
 # Set the JWT refresh token expiration time
 app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=30)
 
-# Set folder for profile and food pictures
-PROFILE_PICTURES = os.path.join(app.root_path, 'static', 'uploads', 'profile_pics')
-
-app.config['PROFILE_PICTURES'] = PROFILE_PICTURES
-
 
 # Create a JWTManager object
 jwt = JWTManager()
@@ -69,7 +64,7 @@ def update_suggest():
     while True:
         daily_foods  = list(storage.all(Food).values())
         suggested_foods: list[DailySuggestion] = list()
-        foods = random.sample(daily_foods, 6)
+        foods = random.sample(daily_foods, 10)
         for food in foods:
             new = DailySuggestion(food_id=food.id)
             new.save()
@@ -81,7 +76,7 @@ def update_suggest():
 
 
 # Running Flask application
-if __name__ == '__main__':
+def run():
     update = Thread(target=update_suggest)
     update.start()
     app.register_blueprint(app_views)

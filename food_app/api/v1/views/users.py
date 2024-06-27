@@ -116,3 +116,8 @@ def update_user():
         'name': user.name,
         'email': user.email,
     }), 200
+
+
+@app_views.route('/health')
+def healt_check():
+    return "SALAM GAGA", 200
