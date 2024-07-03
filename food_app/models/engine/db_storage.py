@@ -9,7 +9,7 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        self.__engine = create_engine(os.environ.get("DATABASE_URL"), pool_pre_ping=True)
+        self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.format('food_mania', 'food_mania_pwd', 'localhost', 'food_mania_db'), pool_pre_ping=True)
 
     
     def new(self, obj):
