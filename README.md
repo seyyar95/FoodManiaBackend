@@ -1,4 +1,4 @@
-#FoodMania API
+# FoodMania API
 
 This project is a backend API that provides food recommendations based on ingredients provided by the frontend. It is built using Flask, SQLAlchemy, MySQL, and Python.
 
@@ -54,10 +54,10 @@ Replace `username` and `password` with your MySQL credentials.
 
 ### Run the Application
 ```bash
-python3 -m api.v1.app
+python3 main.py
 ```
 The application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 ## Authors
-Sayyar Heydarov - [Github](https://github.com/seyyar95)
-Gunay Gasimova - [Github](https://github.com/LGunay)
+* Sayyar Heydarov - [Github](https://github.com/seyyar95)
+* Gunay Gasimova - [Github](https://github.com/LGunay)
